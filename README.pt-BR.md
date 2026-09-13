@@ -6,19 +6,11 @@
 
 Um framework moderno e reutilizável para diálogos em aplicações Delphi, com API pública limpa, renderização em runtime, separação de temas e preservação rigorosa das regras de negócio da aplicação.
 
-[![Linguagem](https://img.shields.io/badge/Linguagem-Object%20Pascal-5C2D91?style=for-the-badge)](https://docwiki.embarcadero.com/RADStudio/en/Delphi_Language_Guide_Index)
-[![Delphi](https://img.shields.io/badge/Delphi-12%20Athens%20Target-E62431?style=for-the-badge)](https://www.embarcadero.com/products/delphi)
-[![FireMonkey](https://img.shields.io/badge/UI-FireMonkey-2563EB?style=for-the-badge)](https://docwiki.embarcadero.com/RADStudio/en/FireMonkey_Application_Platform)
-[![Tipo de Projeto](https://img.shields.io/badge/Projeto-Componente%20%2F%20Framework-0F766E?style=for-the-badge)](#-visão-geral)
-
+[![Linguagem](https://img.shields.io/badge/Linguagem-Object%20Pascal-5C2D91?style=flat-square)](https://docwiki.embarcadero.com/RADStudio/en/Delphi_Language_Guide_Index)
+[![Delphi](https://img.shields.io/badge/Delphi-12%20Athens%20Target-E62431?style=flat-square)](https://www.embarcadero.com/products/delphi)
+[![FireMonkey](https://img.shields.io/badge/UI-FireMonkey-2563EB?style=flat-square)](https://docwiki.embarcadero.com/RADStudio/en/FireMonkey_Application_Platform)
 [![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-F59E0B?style=flat-square)](#-status-do-projeto)
-[![Linguagem Principal](https://img.shields.io/github/languages/top/ricksolucoes/RickDialogPro?style=flat-square&label=Linguagem%20Principal)](https://github.com/ricksolucoes/RickDialogPro)
-[![Último Commit](https://img.shields.io/github/last-commit/ricksolucoes/RickDialogPro?style=flat-square&label=%C3%9Altimo%20Commit)](https://github.com/ricksolucoes/RickDialogPro/commits)
-[![Tamanho](https://img.shields.io/github/repo-size/ricksolucoes/RickDialogPro?style=flat-square&label=Tamanho)](https://github.com/ricksolucoes/RickDialogPro)
-[![Issues](https://img.shields.io/github/issues/ricksolucoes/RickDialogPro?style=flat-square)](https://github.com/ricksolucoes/RickDialogPro/issues)
-[![Stars](https://img.shields.io/github/stars/ricksolucoes/RickDialogPro?style=flat-square)](https://github.com/ricksolucoes/RickDialogPro/stargazers)
-[![Forks](https://img.shields.io/github/forks/ricksolucoes/RickDialogPro?style=flat-square)](https://github.com/ricksolucoes/RickDialogPro/network/members)
-[![Licença](https://img.shields.io/badge/Licen%C3%A7a-All%20Rights%20Reserved-64748B?style=flat-square)](#-licença)
+[![Licença](https://img.shields.io/badge/Licen%C3%A7a-Uso%20Limitado%20Revog%C3%A1vel-64748B?style=flat-square)](LICENSE.pt-BR.md)
 
 [English](README.md) · **Português (Brasil)**
 
@@ -271,7 +263,9 @@ RickDialogPro/
 ├── tests/               # Testes automatizados existentes e futuros, quando aplicável
 ├── docs/                # Documentação técnica complementar
 ├── README.md            # Documentação oficial — inglês
-└── README.pt-BR.md      # Tradução para português do Brasil
+├── README.pt-BR.md      # Tradução para português do Brasil
+├── LICENSE              # Licença revogável oficial — inglês
+└── LICENSE.pt-BR.md     # Tradução da licença em português
 ```
 
 Os nomes das units internas serão documentados após a aprovação da reorganização estrutural. Os nomes públicos já definidos para a nova geração são:
@@ -309,18 +303,24 @@ Para relatar problemas, dúvidas ou propostas, utilize a seção [Issues](https:
 
 ## 🔐 Licença
 
-Copyright © 2026 **Ricardo R. Pereira**. Todos os direitos reservados.
+Copyright © 2026 **RickSoluções**. Todos os direitos reservados.
 
-Este repositório **não** concede atualmente uma licença open source para copiar, modificar, redistribuir, sublicenciar ou utilizar o código-fonte em outros projetos. Qualquer autorização deve ser concedida expressamente pelo titular dos direitos autorais.
+O RickDialogPro é um **software proprietário** disponibilizado sob uma **Licença de Uso Limitado Revogável**. A licença concede autorização limitada, não exclusiva, não transferível e revogável para utilizar, estudar, testar e modificar o Software enquanto essa autorização permanecer válida.
 
-Caso o modelo de licenciamento seja alterado, o repositório passará a incluir um arquivo de licença explícito e esta seção será atualizada.
+A licença **não** autoriza automaticamente redistribuição, sublicenciamento, publicação, hospedagem, comercialização, uso como SaaS ou incorporação em produtos ou serviços comerciais. Direitos comerciais, empresariais, OEM, SaaS, redistribuição, hospedagem e outras modalidades poderão ser concedidos separadamente e por escrito pela RickSoluções.
+
+- 📄 **Licença oficial (inglês):** [`LICENSE`](LICENSE)
+- 🇧🇷 **Tradução em português:** [`LICENSE.pt-BR.md`](LICENSE.pt-BR.md)
+
+> [!IMPORTANT]
+> O fato de o código-fonte estar publicamente acessível não torna o RickDialogPro open source e não concede direitos além daqueles expressamente previstos na licença aplicável.
 
 ---
 
-## 👤 Autor
+## 👤 Mantenedor
 
-**Ricardo R. Pereira**  
-Projeto e desenvolvimento do **RickDialogPro**.
+**RickSoluções**  
+Titular e mantenedora do **RickDialogPro**.
 
 ---
 
