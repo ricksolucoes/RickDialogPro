@@ -1,0 +1,129 @@
+object PageMain: TPageMain
+  Left = 0
+  Top = 0
+  Caption = 'RickDialogPro - Source'
+  ClientHeight = 290
+  ClientWidth = 360
+  Fill.Kind = Gradient
+  Fill.Gradient.Points = <
+    item
+      Color = xFF393939
+      Offset = 0.003105590119957924
+    end
+    item
+      Color = xFF434343
+      Offset = 0.993788838386535600
+    end>
+  Fill.Gradient.StartPosition.X = 0.080450169742107390
+  Fill.Gradient.StopPosition.X = 0.919549822807312000
+  Position = ScreenCenter
+  Quality = HighQuality
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  DesignerMasterStyle = 0
+  object btError: TSpeedButton
+    Cursor = crHandPoint
+    StyledSettings = [Family, Style]
+    Position.X = 32.000000000000000000
+    Position.Y = 134.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Error'
+    TextSettings.Font.Size = 14.000000000000000000
+    TextSettings.FontColor = xFFBCBCBC
+    TextSettings.Trimming = None
+    OnClick = btErrorClick
+  end
+  object btWarning: TSpeedButton
+    Cursor = crHandPoint
+    StyledSettings = [Family, Style]
+    Position.X = 214.000000000000000000
+    Position.Y = 134.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Warning'
+    TextSettings.Font.Size = 14.000000000000000000
+    TextSettings.FontColor = xFFBCBCBC
+    TextSettings.Trimming = None
+    OnClick = btWarningClick
+  end
+  object lblTitle: TLabel
+    Align = Top
+    AutoSize = True
+    StyledSettings = [Family, Style]
+    Margins.Left = 10.000000000000000000
+    Margins.Top = 10.000000000000000000
+    Margins.Bottom = 10.000000000000000000
+    Position.X = 10.000000000000000000
+    Position.Y = 10.000000000000000000
+    Size.Width = 350.000000000000000000
+    Size.Height = 32.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 24.000000000000000000
+    TextSettings.FontColor = xFFA6A6A6
+    Text = 'Rick Message Dialog Pro'
+    TabOrder = 2
+  end
+  object lnTitle: TLine
+    Align = Top
+    LineType = Bottom
+    Position.Y = 52.000000000000000000
+    Size.Width = 360.000000000000000000
+    Size.Height = 1.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Color = xC8DCDCDC
+  end
+  object btInformation: TSpeedButton
+    Cursor = crHandPoint
+    StyledSettings = [Family, Style]
+    Position.X = 32.000000000000000000
+    Position.Y = 216.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Information'
+    TextSettings.Font.Size = 14.000000000000000000
+    TextSettings.FontColor = xFFBCBCBC
+    TextSettings.Trimming = None
+    OnClick = btInformationClick
+  end
+  object btSuccess: TSpeedButton
+    Cursor = crHandPoint
+    StyledSettings = [Family, Style]
+    Position.X = 214.000000000000000000
+    Position.Y = 216.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Success'
+    TextSettings.Font.Size = 14.000000000000000000
+    TextSettings.FontColor = xFFBCBCBC
+    TextSettings.Trimming = None
+    OnClick = btSuccessClick
+  end
+  object lblThemas: TLabel
+    AutoSize = True
+    StyledSettings = [Family, Style]
+    Position.X = 24.000000000000000000
+    Position.Y = 72.000000000000000000
+    Size.Width = 65.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.Font.Size = 16.000000000000000000
+    TextSettings.FontColor = xFFBABABA
+    Text = 'Themas:'
+    TabOrder = 6
+    object cbxThemas: TComboBox
+      Position.X = 73.000000000000000000
+      Size.Width = 240.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+    end
+  end
+end

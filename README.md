@@ -14,7 +14,7 @@ A modern, reusable dialog framework designed for Delphi applications, with a cle
 
 **English** · [Português (Brasil)](README.pt-BR.md)
 
-[Overview](#-overview) · [Highlights](#-highlights) · [Architecture](#-architecture) · [Quick Start](#-quick-start) · [Roadmap](#-roadmap) · [License](#-license)
+[Overview](#-overview) · [Highlights](#-highlights) · [Architecture](#-architecture) · [Quick Start](#-quick-start) · [Tests](#-automated-tests) · [Structural Changes](#-structural-changes-in-this-reorganization) · [Roadmap](#-roadmap) · [License](#-license)
 
 </div>
 
@@ -24,10 +24,10 @@ A modern, reusable dialog framework designed for Delphi applications, with a cle
 
 **RickDialogPro** is a Delphi FireMonkey framework focused on presenting consistent, reusable, and visually controlled modal dialogs without coupling the consuming application to a concrete UI implementation.
 
-The project is being redesigned around the public unit **`Rick.Dialog.Pro`** and the public facade **`TRickDialogPro`**. The existing implementation is being used only as the functional reference for this evolution.
+The public API is exposed through **`Rick.Dialog.Pro`** and the **`TRickDialogPro`** facade. Internal implementation units remain separated from the supported consumer entry point.
 
 > [!IMPORTANT]
-> RickDialogPro is currently under structural modernization. The priority is to reorganize responsibilities while preserving existing behavior. Internal units, contracts, and implementation details may change before the first stable release.
+> RickDialogPro is currently under structural modernization. The priority is to improve responsibility separation while preserving existing behavior. Internal implementation details may continue to evolve before the first stable release.
 
 ---
 
@@ -35,11 +35,12 @@ The project is being redesigned around the public unit **`Rick.Dialog.Pro`** and
 
 - 🎯 **Simple public entry point** through `Rick.Dialog.Pro` and `TRickDialogPro`.
 - 🪟 **Runtime-created dialogs**, without requiring a dedicated `.fmx` form for the framework itself.
-- 🧩 **Clear separation of responsibilities** between public API, contracts, renderer, types, and visual themes.
+- 🧩 **Clear separation of responsibilities** between public API, contracts, FireMonkey implementation, runtime UI, public types, and visual themes.
 - 🎨 **Theme-oriented design**, keeping visual decisions separate from dialog rendering.
 - 🔌 **Interface-oriented architecture** where appropriate, reducing direct dependency on concrete implementations.
 - 🧱 **No business-rule ownership**: the dialog reports the user's action; the consuming application decides what that action means.
 - 🧭 **Conservative modernization**: structural improvement without intentional changes to behavior, algorithms, execution flow, or exception semantics.
+- 🧪 **Automated DUnitX coverage** for configuration, themes, runtime rendering, interaction behavior, modal results, and the public facade.
 - 📚 **Documentation-first release process**, with code/documentation consistency as a quality gate.
 
 ---
@@ -48,25 +49,25 @@ The project is being redesigned around the public unit **`Rick.Dialog.Pro`** and
 
 > **Current stage:** active development / structural modernization.
 
-The target public naming is already defined:
+The public entry point is currently defined as:
 
 ```text
 Public unit   : Rick.Dialog.Pro
 Public facade : TRickDialogPro
 ```
 
-The first stable release will only be considered ready after structural review, documentation review, static validation, and—when a Delphi build environment is available—successful compilation and execution of the existing automated tests.
+The project now includes an automated DUnitX suite integrated into the repository. In the current validated Win32 run, all **48 tests passed**, with no ignored tests, failures, errors, or reported leaks.
 
-No compatibility claim is made for an unvalidated Delphi version or target platform.
+That result confirms the behavior exercised by the current suite on Win32. Other target platforms are still considered unvalidated until they are built and executed in their own environments, so RickDialogPro does not make compatibility claims beyond the configurations that have actually been verified.
 
 ---
 
 ## 🧠 Design Principles
 
-RickDialogPro is being organized around a small set of non-negotiable engineering principles:
+RickDialogPro is organized around a small set of non-negotiable engineering principles:
 
 - **Behavior preservation before architectural elegance**.
-- **Separation of Concerns** between contracts, implementation, visual themes, and consuming business logic.
+- **Separation of Concerns** between contracts, implementation, runtime UI, visual themes, and consuming business logic.
 - **High cohesion and low coupling** between units.
 - **Dependency direction kept explicit** and free of unnecessary circular references.
 - **Public API stability** whenever structural changes do not require otherwise.
@@ -78,37 +79,42 @@ These principles guide organization; they do not authorize changes to business b
 
 ## 🏗 Architecture
 
-The intended architecture keeps the consuming application isolated from the concrete FireMonkey renderer.
+The current architecture keeps the consuming application isolated from the internal FireMonkey implementation.
 
 ```mermaid
 flowchart TD
     APP[Delphi Application] --> API[Rick.Dialog.Pro\nTRickDialogPro]
-    API --> CONTRACT[Dialog Contract]
-    CONTRACT --> RENDERER[FireMonkey Renderer]
-    RENDERER --> THEME[Visual Theme]
-    RENDERER --> FORM[Runtime Modal Form]
-    FORM --> RESULT[User Action Result]
+    API --> CONTRACT[IRickDialogPro]
+    CONTRACT --> IMPL[Rick.Dialog.Pro.Impl.FMX]
+    IMPL --> RUNTIME[Rick.Dialog.Pro.Impl.FMX.RuntimeForm\nInternal runtime UI]
+    IMPL --> THEME[Visual Theme]
+    RUNTIME --> RESULT[User Action Result]
     RESULT --> APP
 ```
 
-### Responsibilities
+### Current unit responsibilities
 
-| Layer | Responsibility |
+| Unit | Responsibility |
 |---|---|
-| **Public facade** | Exposes the supported API to the consuming application. |
-| **Contracts** | Defines dialog capabilities without binding consumers to a concrete renderer. |
-| **Public types** | Represents dialog semantics, configuration, and user action results. |
-| **FireMonkey renderer** | Creates, displays, and disposes the runtime visual tree. |
-| **Theme** | Provides visual decisions such as colors and interaction states. |
-| **Consuming application** | Owns all business rules triggered by the returned user action. |
+| `Rick.Dialog.Pro` | Public facade and recommended consumer entry point. |
+| `Rick.Dialog.Pro.Interf` | Public dialog contract. |
+| `Rick.Dialog.Pro.Types` | Public configuration and result types. |
+| `Rick.Dialog.Pro.Impl.FMX` | FireMonkey implementation of the public contract and control of the dialog execution lifecycle. |
+| `Rick.Dialog.Pro.Impl.FMX.RuntimeForm` | Internal implementation of the runtime-created modal UI. |
+| `Rick.Dialog.Pro.Icons` | Icon data and resolution used by the visual implementation. |
+| `Rick.Dialog.Pro.Theme.Interf` | Visual theme contract. |
+| `Rick.Dialog.Pro.Theme.Default` | Current default theme implementation. |
+| `Rick.Dialog.Pro.Theme.Default.Colors` | Color constants used by the default theme. |
+
+Units under `Rick.Dialog.Pro.Impl.*` are implementation details. Consumer code should use the public `Rick.Dialog.Pro` facade rather than depending directly on internal units.
 
 ---
 
 ## 🧩 Responsibility Boundary
 
-RickDialogPro is intended to handle **presentation** and **user action capture** only.
+RickDialogPro handles **presentation** and **user action capture** only.
 
-It must not own application-specific concerns such as:
+It does not own application-specific concerns such as:
 
 - database access;
 - HTTP/API calls;
@@ -125,10 +131,7 @@ This boundary keeps the component reusable and prevents the dialog layer from be
 
 ## 🚀 Quick Start
 
-The public API is being standardized around `Rick.Dialog.Pro` and `TRickDialogPro`.
-
-> [!NOTE]
-> The examples below illustrate the intended usage derived from the current functional reference. Final signatures will be documented from the validated implementation before the first stable release.
+The current public API is available through `Rick.Dialog.Pro` and `TRickDialogPro`.
 
 ### Information dialog
 
@@ -163,11 +166,47 @@ end;
 
 The dialog presents choices and returns the selected action. The consuming application remains responsible for deciding what happens next.
 
+A FireMonkey consumer example is included under `source/` and consumes the framework through the public `Rick.Dialog.Pro` unit.
+
+---
+
+## 📚 Documentation
+
+For complete usage examples, configuration details, result handling, and custom-theme guidance, see:
+
+- [Usage Guide](docs/GUIDE.md)
+- [Guia de Uso em Português](docs/GUIDE.pt-BR.md)
+
+---
+
+## 🧪 Automated Tests
+
+RickDialogPro includes a dedicated DUnitX console project under `tests/`. The suite is part of `RickDialog.groupproj`, uses the same framework sources consumed by the example project, and writes an NUnit-compatible XML result when executed through the standard DUnitX runner.
+
+The current suite contains **48 automated tests**. They exercise the parts of the framework that can be checked deterministically without relying on pixel-perfect rendering: configuration builders and defaults, icon data, the default theme, runtime form creation, background behavior, themed surfaces and text, semantic colors, primary and secondary buttons, hover states, tooltip behavior, modal results, and end-to-end calls through `TRickDialogPro`.
+
+The modal tests drive the actual runtime form and button handlers. The suite also checks the three dialog results currently exposed by the implementation: `None`, `Primary`, and `Secondary`.
+
+The test project is currently enabled for **Win32**. In the current validated run, the suite reported:
+
+```text
+Tests Found   : 48
+Tests Ignored : 0
+Tests Passed  : 48
+Tests Leaked  : 0
+Tests Failed  : 0
+Tests Errored : 0
+```
+
+To run the suite from Delphi, open `RickDialog.groupproj` or `tests/RickDialogPro.Tests.dproj`, select the Win32 target, build, and run `RickDialogPro.Tests`. The test project already carries the source search paths required by the framework and uses `--exitbehavior:Pause` for console execution from the IDE.
+
+The automated suite validates behavior and component state. Visual appearance across fonts, DPI settings, window managers, and operating systems still requires platform-specific verification.
+
 ---
 
 ## 🎭 Dialog Semantics
 
-The functional reference currently uses four visual semantics:
+The current implementation uses four visual semantics:
 
 | Semantic | Intended use |
 |---|---|
@@ -182,9 +221,9 @@ Visual details such as status colors, icons, button states, and surfaces belong 
 
 ## 🎨 Theming
 
-The design goal is to keep the renderer independent from a specific visual identity.
+The theme contract separates visual values from the dialog implementation.
 
-A theme may provide values for elements such as:
+A theme can provide values for elements such as:
 
 - window background;
 - primary and elevated surfaces;
@@ -196,32 +235,33 @@ A theme may provide values for elements such as:
 - secondary button states;
 - hover/interactivity states.
 
-Theme replacement should not require changing the behavior of the dialog renderer.
+Theme concerns remain separate from the business rules of the consuming application.
+
+In the current configuration, `UseBackground` is `False` by default. When enabled through `TRickDialogProConfig` and executed with `Execute`, the RuntimeForm uses `IRickDialogProTheme.Background` as the host form `Fill.Color`. The complete guide documents this usage and the fact that `Transparency = True` remains unchanged.
 
 ---
 
 ## 🔄 Lifecycle
 
-The conceptual lifecycle of a dialog call is:
+For each execution, the FireMonkey implementation creates the runtime modal UI, performs the modal interaction, and releases that runtime instance when the operation completes.
 
 ```mermaid
 sequenceDiagram
     participant App as Application
-    participant API as TRickDialogPro
-    participant UI as FireMonkey Renderer
-    participant Modal as Runtime Dialog
+    participant API as Rick.Dialog.Pro
+    participant Impl as FireMonkey Implementation
+    participant Modal as Internal Runtime UI
 
     App->>API: Request dialog
-    API->>UI: Build presentation
-    UI->>Modal: Create runtime controls
-    Modal-->>App: Wait for user interaction
-    Modal->>UI: Selected action
-    UI->>UI: Release runtime resources
-    UI-->>API: Return result
+    API->>Impl: Execute configuration
+    Impl->>Modal: Create runtime modal UI
+    Modal-->>Impl: Selected user action
+    Impl->>Impl: Release runtime instance
+    Impl-->>API: Return result
     API-->>App: User action result
 ```
 
-The intended implementation model creates the modal UI for the call and releases the runtime visual resources when the interaction completes.
+The internal runtime UI is an implementation detail and is not the supported consumer entry point.
 
 ---
 
@@ -233,7 +273,15 @@ Until a versioned distribution mechanism is published, integration is source-bas
 git clone https://github.com/ricksolucoes/RickDialogPro.git
 ```
 
-The final source directories that must be added to the Delphi **Search Path** will be documented after the repository structure is consolidated.
+When directly referencing the sources using the repository's current layout, the included FireMonkey example uses these Delphi **Search Path** directories:
+
+```text
+src
+src\Impl
+src\Theme
+```
+
+These paths describe the current source organization; they are not a declaration of how every future distribution mechanism must be configured.
 
 > [!NOTE]
 > No package manager integration, IDE installer, or GetIt distribution is currently declared.
@@ -244,51 +292,80 @@ The final source directories that must be added to the Delphi **Search Path** wi
 
 | Item | Status |
 |---|---|
-| **Delphi 12 Athens** | Primary modernization target; final validation pending. |
-| **Modern Delphi versions** | Compatibility matrix will be published only after validation. |
+| **Delphi 12 Athens** | Primary development target. |
 | **FireMonkey** | Target UI framework. |
-| **Platforms** | Supported targets will be listed only after build/test validation. |
+| **Win32** | Automated suite executed successfully: 48/48 tests passed. |
+| **Other platforms** | Not yet validated by the current automated test project. |
 
-RickDialogPro will not advertise compatibility that has not been technically confirmed.
+RickDialogPro only documents compatibility that has been technically verified. The current test project is configured for Win32; other targets should be considered pending until they are built and exercised directly.
 
 ---
 
 ## 📁 Repository Structure
 
-The final physical layout is still being consolidated. The intended responsibility-based organization is:
+The current repository structure relevant to framework development and the included example is:
 
 ```text
 RickDialogPro/
-├── src/                 # Framework source code
-├── tests/               # Existing and future automated tests, when applicable
-├── docs/                # Additional technical documentation
-├── README.md            # Official documentation — English
-├── README.pt-BR.md      # Portuguese translation
-├── LICENSE              # Official revocable license — English
-└── LICENSE.pt-BR.md     # Portuguese license translation
+├── src/
+│   ├── Rick.Dialog.Pro.pas
+│   ├── Rick.Dialog.Pro.Interf.pas
+│   ├── Rick.Dialog.Pro.Types.pas
+│   ├── Rick.Dialog.Pro.Icons.pas
+│   ├── Impl/
+│   │   ├── Rick.Dialog.Pro.Impl.FMX.pas
+│   │   └── Rick.Dialog.Pro.Impl.FMX.RuntimeForm.pas
+│   └── Theme/
+│       ├── Rick.Dialog.Pro.Theme.Interf.pas
+│       ├── Rick.Dialog.Pro.Theme.Default.pas
+│       └── Rick.Dialog.Pro.Theme.Default.Colors.pas
+├── source/
+│   ├── RickDialogPro.Source.dpr
+│   ├── RickDialogPro.Source.dproj
+│   └── view/
+│       ├── RickDialogPro.Source.Page.Main.pas
+│       └── RickDialogPro.Source.Page.Main.fmx
+├── tests/
+│   ├── RickDialogPro.Tests.dpr
+│   ├── RickDialogPro.Tests.dproj
+│   └── src/
+│       ├── Rick.Dialog.Pro.Tests.Environment.pas
+│       ├── Support/
+│       │   ├── Rick.Dialog.Pro.Tests.FMX.Helpers.pas
+│       │   └── Rick.Dialog.Pro.Tests.ThemeSpy.pas
+│       └── Units/
+│           ├── Rick.Dialog.Pro.Tests.Types.pas
+│           ├── Rick.Dialog.Pro.Tests.Icons.pas
+│           ├── Rick.Dialog.Pro.Tests.Theme.Default.pas
+│           └── Rick.Dialog.Pro.Tests.Runtime.Form.pas
+├── RickDialogPro.dpr
+├── RickDialogPro.dproj
+├── RickDialog.groupproj
+├── README.md
+├── README.pt-BR.md
+├── LICENSE
+└── LICENSE-pt-BR
 ```
 
-Internal unit names will be documented after the structural reorganization is approved. The public names already defined for the new generation are:
+---
 
-```text
-Rick.Dialog.Pro
-TRickDialogPro
-```
+## 🔧 Structural Changes in This Reorganization
+
+- Added the internal unit `Rick.Dialog.Pro.Impl.FMX.RuntimeForm`.
+- Moved the runtime modal UI implementation out of `Rick.Dialog.Pro.Impl.FMX` into the new internal unit.
+- Kept `Rick.Dialog.Pro.Impl.FMX` responsible for the FireMonkey implementation of `IRickDialogPro` and for the dialog execution lifecycle.
+- Kept the public `Rick.Dialog.Pro` facade unchanged as the supported consumer entry point.
+- This reorganization does not introduce new dialog functionality.
 
 ---
 
 ## 🗺 Roadmap
 
-- [ ] Establish `Rick.Dialog.Pro` as the public entry unit.
-- [ ] Establish `TRickDialogPro` as the public facade.
-- [ ] Separate contracts, public types, implementation, and themes into cohesive units.
-- [ ] Review unit dependencies and remove unnecessary structural coupling.
-- [ ] Preserve behavior while reorganizing the existing functional reference.
-- [ ] Update XMLDoc and developer documentation.
-- [ ] Perform independent structural and semantic code review.
-- [ ] Compile supported configurations when a Delphi build environment is available.
-- [ ] Run existing automated tests when available and applicable.
-- [ ] Publish the validated compatibility matrix.
+- [ ] Continue reviewing unit dependencies and unnecessary structural coupling.
+- [ ] Continue updating XMLDoc and developer documentation as the code evolves.
+- [ ] Perform independent structural and semantic code review before the stable release.
+- [ ] Validate additional target platforms before declaring broader compatibility.
+- [ ] Publish a compatibility matrix only after those targets have been technically validated.
 - [ ] Prepare the first stable release.
 
 ---
@@ -310,7 +387,7 @@ RickDialogPro is **proprietary software** made available under a **Revocable Lim
 The license does **not** automatically authorize redistribution, sublicensing, publication, hosting, commercialization, SaaS use, or incorporation into commercial products or services. Commercial, enterprise, OEM, SaaS, redistribution, hosting, and other rights may be granted separately in writing by RickSoluções.
 
 - 📄 **Official license (English):** [`LICENSE`](LICENSE)
-- 🇧🇷 **Portuguese translation:** [`LICENSE.pt-BR.md`](LICENSE.pt-BR.md)
+- 🇧🇷 **Portuguese translation:** [`LICENSE-pt-BR`](LICENSE-pt-BR)
 
 > [!IMPORTANT]
 > The source code being publicly accessible does not make RickDialogPro open source and does not grant rights beyond those expressly stated in the applicable license.

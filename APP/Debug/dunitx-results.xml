@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<test-results name="C:\Projects\Language\Delphi\Middleware\RickDialogPro\APP\Debug\RickDialogPro.Tests.exe" total="48" errors="0" failures="0" ignored="0" inconclusive="0" not-run="0" skipped="0" invalid="0" date="2026-09-14" time="5.402">
+  <culture-info current-culture="en" current-uiculture="en" />
+  <test-suite type="Assembly" name="RickDialogPro.Tests.exe" executed="true" result="Success" success="True" time="5.402" asserts="0">
+    <results>
+        <test-suite type="Namespace" name="Rick" executed="true" result="Success" success="True" time="5.400" asserts="0" >
+          <results>
+              <test-suite type="Namespace" name="Tests" executed="true" result="Success" success="True" time="5.400" asserts="0" >
+                <results>
+                    <test-suite type="Fixture" name="TEnvironmentTests" executed="True" result="Success" success="True" time="1.255" >
+                      <results>
+                        <test-case name="FMXEnvironment_CanSafelyCreateAndManipulateControls" executed="True" result="Success" success="True" time="1.237" asserts="0" />
+                        <test-case name="RuntimeForm_CanBeCreatedAndDestroyed" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                        <test-case name="RuntimeForm_ControlsCanBeLocated" executed="True" result="Success" success="True" time="0.016" asserts="0" />
+                      </results>
+                    </test-suite>
+                    <test-suite type="Fixture" name="TIconsTests" executed="True" result="Success" success="True" time="0.001" >
+                      <results>
+                        <test-case name="Error_ReturnsValidIcon" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                        <test-case name="Warning_ReturnsValidIcon" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                        <test-case name="Information_ReturnsValidIcon" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                        <test-case name="Success_ReturnsValidIcon" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                        <test-case name="Kinds_ReturnDifferentPaths" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                      </results>
+                    </test-suite>
+                    <test-suite type="Namespace" name="Form" executed="true" result="Success" success="True" time="4.140" asserts="0" >
+                      <results>
+                          <test-suite type="Fixture" name="TFacadeTests" executed="True" result="Success" success="True" time="3.965" >
+                            <results>
+                              <test-case name="New_DefaultTheme_ReturnsDialog" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                              <test-case name="New_CustomTheme_ReturnsDialog" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                              <test-case name="New_NilTheme_RaisesArgumentNil" executed="True" result="Success" success="True" time="3.862" asserts="0" />
+                              <test-case name="Execute_Primary_EndToEnd" executed="True" result="Success" success="True" time="0.023" asserts="0" />
+                              <test-case name="Error_Primary_EndToEnd" executed="True" result="Success" success="True" time="0.018" asserts="0" />
+                              <test-case name="Warning_Primary_EndToEnd" executed="True" result="Success" success="True" time="0.014" asserts="0" />
+                              <test-case name="Information_Primary_EndToEnd" executed="True" result="Success" success="True" time="0.012" asserts="0" />
+                              <test-case name="Success_Primary_EndToEnd" executed="True" result="Success" success="True" time="0.019" asserts="0" />
+                              <test-case name="Warning_Secondary_EndToEnd" executed="True" result="Success" success="True" time="0.017" asserts="0" />
+                            </results>
+                          </test-suite>
+                          <test-suite type="Fixture" name="TRuntimeFormTests" executed="True" result="Success" success="True" time="0.175" >
+                            <results>
+                              <test-case name="Background_Disabled_PreservesTransparentFill" executed="True" result="Success" success="True" time="0.008" asserts="0" />
+                              <test-case name="Background_Enabled_UsesThemeBackground" executed="True" result="Success" success="True" time="0.004" asserts="0" />
+                              <test-case name="Card_UsesThemeSurfaceAndBorder" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                              <test-case name="Texts_UseThemePrimaryAndSecondaryColors" executed="True" result="Success" success="True" time="0.012" asserts="0" />
+                              <test-case name="SemanticVisuals_UseKindSpecificThemeValues" executed="True" result="Success" success="True" time="0.033" asserts="0" />
+                              <test-case name="PrimaryButton_UsesThemeColors" executed="True" result="Success" success="True" time="0.003" asserts="0" />
+                              <test-case name="SecondaryButton_ShowSecondaryFalse_DoesNotCreate" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                              <test-case name="SecondaryButton_BlankCaption_DoesNotCreate" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                              <test-case name="SecondaryButton_WithCaption_CreatesAndUsesThemeColors" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                              <test-case name="PrimaryButton_HoverUsesAndRestoresThemeColors" executed="True" result="Success" success="True" time="0.016" asserts="0" />
+                              <test-case name="SecondaryButton_HoverUsesAndRestoresThemeColors" executed="True" result="Success" success="True" time="0.005" asserts="0" />
+                              <test-case name="TextTooltip_LongTitle_ShowsAndHidesWithThemeColors" executed="True" result="Success" success="True" time="0.012" asserts="0" />
+                              <test-case name="TextTooltip_LongWrappedMessage_ShowsAndHides" executed="True" result="Success" success="True" time="0.017" asserts="0" />
+                              <test-case name="ButtonTooltip_LongCaption_ShowsAndHides" executed="True" result="Success" success="True" time="0.007" asserts="0" />
+                              <test-case name="Execute_CloseWithoutAction_ReturnsNone" executed="True" result="Success" success="True" time="0.016" asserts="0" />
+                              <test-case name="Execute_PrimaryClick_ReturnsPrimary" executed="True" result="Success" success="True" time="0.006" asserts="0" />
+                              <test-case name="Execute_SecondaryClick_ReturnsSecondary" executed="True" result="Success" success="True" time="0.023" asserts="0" />
+                            </results>
+                          </test-suite>
+                      </results>
+                    </test-suite>
+                    <test-suite type="Fixture" name="TDefaultThemeTests" executed="True" result="Success" success="True" time="0.002" >
+                      <results>
+                        <test-case name="New_ReturnsTheme" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                        <test-case name="BaseColors_ReturnExpectedValues" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                        <test-case name="Error_ReturnsExpectedSemanticColors" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                        <test-case name="Warning_ReturnsExpectedSemanticColors" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                        <test-case name="Information_ReturnsExpectedSemanticColors" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                        <test-case name="Success_ReturnsExpectedSemanticColors" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                        <test-case name="SecondaryButton_ReturnsExpectedColors" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                      </results>
+                    </test-suite>
+                    <test-suite type="Fixture" name="TConfigTests" executed="True" result="Success" success="True" time="0.001" >
+                      <results>
+                        <test-case name="Default_ReturnsExpectedValues" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                        <test-case name="Error_ReturnsExpectedValues" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                        <test-case name="Warning_ReturnsExpectedValues" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                        <test-case name="Information_ReturnsExpectedValues" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                        <test-case name="Success_ReturnsExpectedValues" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                        <test-case name="SecondaryCaption_BlankAfterTrim_DisablesSecondary" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                        <test-case name="SecondaryCaption_WithText_EnablesSecondary" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                      </results>
+                    </test-suite>
+                </results>
+              </test-suite>
+          </results>
+        </test-suite>
+    </results>
+  </test-suite>
+</test-results>

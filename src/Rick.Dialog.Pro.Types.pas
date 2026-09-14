@@ -123,6 +123,15 @@ type
     ShowSecondary: Boolean;
 
     /// <summary>
+    /// Define se a cor de fundo fornecida pelo tema visual deve ser aplicada
+    /// à janela modal.
+    /// </summary>
+    /// <remarks>
+    /// Quando False, a janela mantém o comportamento transparente atual.
+    /// </remarks>
+    UseBackground: Boolean;
+
+    /// <summary>
     /// Retorna uma configuração inicial com semântica informativa.
     /// </summary>
     /// <returns>
@@ -237,6 +246,7 @@ begin
   Result.PrimaryCaption := 'Entendi';
   Result.SecondaryCaption := EmptyStr;
   Result.ShowSecondary := False;
+  Result.UseBackground := False;
 end;
 
 class function TRickDialogProConfig.Error(const ATitle, AMessageText,

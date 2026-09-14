@@ -12,7 +12,9 @@ uses
   Rick.Dialog.Pro.Theme.Default in 'src\Theme\Rick.Dialog.Pro.Theme.Default.pas',
   Rick.Dialog.Pro.Theme.Interf in 'src\Theme\Rick.Dialog.Pro.Theme.Interf.pas',
   Rick.Dialog.Pro.Impl.FMX in 'src\Impl\Rick.Dialog.Pro.Impl.FMX.pas',
-  Rick.Dialog.Pro.Icons in 'src\Rick.Dialog.Pro.Icons.pas';
+  Rick.Dialog.Pro.Icons in 'src\Rick.Dialog.Pro.Icons.pas',
+  Rick.Dialog.Pro in 'src\Rick.Dialog.Pro.pas',
+  Rick.Dialog.Pro.Impl.FMX.RuntimeForm in 'src\Impl\Rick.Dialog.Pro.Impl.FMX.RuntimeForm.pas';
 
 begin
   try

@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{341A8A34-16CB-4033-814A-FA5805CA5A4E}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="RickDialogPro.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="source\RickDialogPro.Source.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="tests\RickDialogPro.Tests.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="RickDialogPro">
+        <MSBuild Projects="RickDialogPro.dproj"/>
+    </Target>
+    <Target Name="RickDialogPro:Clean">
+        <MSBuild Projects="RickDialogPro.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RickDialogPro:Make">
+        <MSBuild Projects="RickDialogPro.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="RickDialogPro_Source">
+        <MSBuild Projects="source\RickDialogPro.Source.dproj"/>
+    </Target>
+    <Target Name="RickDialogPro_Source:Clean">
+        <MSBuild Projects="source\RickDialogPro.Source.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RickDialogPro_Source:Make">
+        <MSBuild Projects="source\RickDialogPro.Source.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="RickDialogPro_Tests">
+        <MSBuild Projects="tests\RickDialogPro.Tests.dproj"/>
+    </Target>
+    <Target Name="RickDialogPro_Tests:Clean">
+        <MSBuild Projects="tests\RickDialogPro.Tests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RickDialogPro_Tests:Make">
+        <MSBuild Projects="tests\RickDialogPro.Tests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="RickDialogPro;RickDialogPro_Source;RickDialogPro_Tests"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="RickDialogPro:Clean;RickDialogPro_Source:Clean;RickDialogPro_Tests:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="RickDialogPro:Make;RickDialogPro_Source:Make;RickDialogPro_Tests:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
