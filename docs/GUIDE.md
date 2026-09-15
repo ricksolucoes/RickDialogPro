@@ -49,6 +49,7 @@ When the framework is referenced directly from the current source layout, that e
 src
 src\Impl
 src\Theme
+source\theme
 ```
 
 These paths describe the current repository organization. They are not a statement about every possible future distribution mechanism.
@@ -644,21 +645,35 @@ The secondary button methods do not receive `TRickDialogProKind` in the current 
 
 ## 16. Repository Example
 
-The current example under `source/` demonstrates basic consumption with the default theme.
+The FireMonkey example under `source/` demonstrates basic consumption and runtime selection among three themes:
 
-Its form keeps:
+- `Default`, which remains the initial theme and is created with `TRickDialogPro.New`;
+- `Light`, implemented by `TRickDialogProSourceLightTheme`;
+- `Green`, implemented by `TRickDialogProSourceGreenTheme`.
+
+`Light` and `Green` belong to the example project. They demonstrate how a consumer can implement `IRickDialogProTheme` without changing the framework's default theme or public API.
+
+The form keeps:
 
 ```delphi
 FDialog: IRickDialogPro;
 ```
 
-creates it with:
+and starts with:
 
 ```delphi
 FDialog := TRickDialogPro.New;
 ```
 
-and calls the four semantic helpers:
+After selecting `Light` or `Green` and clicking `Apply`, the example recreates `FDialog` through the existing theme overload:
+
+```delphi
+FDialog := TRickDialogPro.New(TRickDialogProSourceLightTheme.New);
+// or
+FDialog := TRickDialogPro.New(TRickDialogProSourceGreenTheme.New);
+```
+
+Selecting `Default` and clicking `Apply` recreates the facade without a theme argument, returning to the framework default. The four semantic helpers continue to be invoked through the same public contract:
 
 ```delphi
 FDialog.Error(...);
@@ -667,7 +682,7 @@ FDialog.Information(...);
 FDialog.Success(...);
 ```
 
-The current example does not establish that every API capability is demonstrated there. In particular, this guide does not use the example project as evidence for custom themes or automated regression testing.
+The example is not evidence that every API capability has dedicated UI coverage, and the example themes are not part of the framework's automated regression suite.
 
 ## 17. Quick API Reference
 
@@ -766,9 +781,9 @@ TRickDialogProConfig.Success(...)
 
 The repository includes a DUnitX project at `tests/RickDialogPro.Tests.dproj`, integrated into `RickDialog.groupproj`. The suite exercises the public configuration builders and icons, the default theme, the runtime form, background handling, semantic colors, primary and secondary buttons, hover behavior, overflow tooltips, modal results, and facade end-to-end flows.
 
-The result file currently stored at `APP/Debug/dunitx-results.xml` records **48 executed tests**, with **0 errors**, **0 failures**, and **0 ignored tests**.
+The current source tree contains **48 `[Test]` declarations**. The console runner is configured to add an NUnit-compatible XML logger using `TDUnitX.Options.XMLOutputFile`, but the project package reviewed here does not contain a persisted DUnitX result artifact.
 
-The test project currently enables **Win32** as its target platform. The repository therefore provides automated evidence for that configured target only; this guide does not extend the same validation claim to Win64, Android, iOS, or macOS.
+The test project currently enables **Win32** as its target platform. A current execution result for that target must therefore be recorded during the build/test quality gate before the stable release. This guide does not extend any validation claim to Win64, Android, iOS, or macOS.
 
 These tests protect deterministic behavior. They should not be interpreted as pixel-perfect visual certification across platforms, fonts, DPI settings, or operating-system rendering differences.
 
@@ -787,6 +802,6 @@ Relevant current behavior:
 - `Transparency` remains `True`; therefore the guide does not extrapolate this into unvalidated visual effects.
 - `TRickDialogPro.New(ATheme)` requires a non-`nil` theme; it does not silently substitute the default theme.
 - Overflow tooltips are enabled only when the runtime detects that the rendered text does not fit its available area.
-- The automated result currently stored in the repository records 48 successful tests, while the test project is configured for Win32.
+- The source tree declares 48 DUnitX tests and the test project is configured for Win32; the reviewed project package does not include a persisted execution-result artifact.
 
 Claims about other target platforms or visual rendering should be added only after those targets are actually validated.

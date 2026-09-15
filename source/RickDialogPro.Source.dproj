@@ -305,6 +305,10 @@
             <Form>PageMain</Form>
             <FormType>fmx</FormType>
         </DCCReference>
+        <DCCReference Include="theme\RickDialogPro.Source.Theme.Green.Colors.pas"/>
+        <DCCReference Include="theme\RickDialogPro.Source.Theme.Green.pas"/>
+        <DCCReference Include="theme\RickDialogPro.Source.Theme.Light.Colors.pas"/>
+        <DCCReference Include="theme\RickDialogPro.Source.Theme.Light.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -346,7 +350,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Win32\Debug\RickDialogPro.Source.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\APP\Debug\RickDialogPro.Source.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>RickDialogPro.Source.exe</RemoteName>
                         <Overwrite>true</Overwrite>

@@ -32,7 +32,7 @@
 {   penalties.                                          }
 {*******************************************************}
 
-unit Rick.Dialog.Pro.Impl.FMX.RuntimeForm;
+unit Rick.Dialog.Pro.Impl.FMX.Runtime.Form;
 
 interface
 

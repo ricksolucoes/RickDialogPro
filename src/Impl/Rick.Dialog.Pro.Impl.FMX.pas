@@ -53,34 +53,13 @@ type
   /// esta classe diretamente.
   /// </remarks>
   TRickDialogProFMX = class sealed(TInterfacedObject, IRickDialogPro)
-  strict private
+  private
     /// <summary>
     /// Tema visual utilizado na criação dos diálogos.
     /// </summary>
     FTheme: IRickDialogProTheme;
 
-    /// <summary>
-    /// Inicializa a implementação com o tema informado.
-    /// </summary>
-    /// <param name="ATheme">
-    /// Tema visual utilizado pelo renderer.
-    /// </param>
-    /// <exception cref="EArgumentNilException">
-    /// Lançada quando o tema informado é nil.
-    /// </exception>
-    constructor Create(const ATheme: IRickDialogProTheme);
-  public
-    /// <summary>
-    /// Cria a implementação FMX encapsulada pela interface pública.
-    /// </summary>
-    /// <param name="ATheme">
-    /// Tema visual utilizado pelo renderer.
-    /// </param>
-    /// <returns>
-    /// Instância de <see cref="IRickDialogPro"/>.
-    /// </returns>
-    class function New(const ATheme: IRickDialogProTheme): IRickDialogPro;
-
+  protected
     /// <summary>
     /// Exibe o diálogo conforme a configuração informada.
     /// </summary>
@@ -131,12 +110,35 @@ type
     function Success(const ATitle: string; const AMessageText: string;
       const APrimaryCaption: string = 'Concluir';
       const ASecondaryCaption: string = ''): TRickDialogProResult;
+
+    /// <summary>
+    /// Inicializa a implementação com o tema informado.
+    /// </summary>
+    /// <param name="ATheme">
+    /// Tema visual utilizado pelo renderer.
+    /// </param>
+    /// <exception cref="EArgumentNilException">
+    /// Lançada quando o tema informado é nil.
+    /// </exception>
+    constructor Create(const ATheme: IRickDialogProTheme);
+
+  public
+    /// <summary>
+    /// Cria a implementação FMX encapsulada pela interface pública.
+    /// </summary>
+    /// <param name="ATheme">
+    /// Tema visual utilizado pelo renderer.
+    /// </param>
+    /// <returns>
+    /// Instância de <see cref="IRickDialogPro"/>.
+    /// </returns>
+    class function New(const ATheme: IRickDialogProTheme): IRickDialogPro; static;
   end;
 
 implementation
 
 uses
-  Rick.Dialog.Pro.Impl.FMX.RuntimeForm,
+  Rick.Dialog.Pro.Impl.FMX.Runtime.Form,
 
   System.SysUtils;
 
@@ -156,7 +158,7 @@ end;
 class function TRickDialogProFMX.New(const ATheme: IRickDialogProTheme)
 : IRickDialogPro;
 begin
-  Result := Self.Create(ATheme);
+  Result := TRickDialogProFMX.Create(ATheme);
 end;
 
 function TRickDialogProFMX.Execute(const AConfig: TRickDialogProConfig)

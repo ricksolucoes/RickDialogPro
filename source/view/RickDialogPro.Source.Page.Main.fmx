@@ -116,14 +116,28 @@ object PageMain: TPageMain
     Size.PlatformDefault = False
     TextSettings.Font.Size = 16.000000000000000000
     TextSettings.FontColor = xFFBABABA
-    Text = 'Themas:'
+    Text = 'Themes:'
     TabOrder = 6
     object cbxThemas: TComboBox
       Position.X = 73.000000000000000000
-      Size.Width = 240.000000000000000000
+      Size.Width = 160.000000000000000000
       Size.Height = 22.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 4
     end
+  end
+  object btApplyTheme: TSpeedButton
+    Cursor = crHandPoint
+    StyledSettings = [Family, Style]
+    Position.X = 276.000000000000000000
+    Position.Y = 68.000000000000000000
+    Size.Width = 58.000000000000000000
+    Size.Height = 28.000000000000000000
+    Size.PlatformDefault = False
+    Text = 'Apply'
+    TextSettings.Font.Size = 13.000000000000000000
+    TextSettings.FontColor = xFFBCBCBC
+    TextSettings.Trimming = None
+    OnClick = btApplyThemeClick
   end
 end

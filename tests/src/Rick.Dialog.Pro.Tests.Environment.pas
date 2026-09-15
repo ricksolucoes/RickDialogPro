@@ -31,7 +31,7 @@ uses
   Rick.Dialog.Pro.Types,
   Rick.Dialog.Pro.Theme.Interf,
   Rick.Dialog.Pro.Theme.Default,
-  Rick.Dialog.Pro.Impl.FMX.RuntimeForm,
+  Rick.Dialog.Pro.Impl.FMX.Runtime.Form,
 
   Rick.Dialog.Pro.Tests.FMX.Helpers;
 

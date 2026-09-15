@@ -107,7 +107,7 @@ uses
   Rick.Dialog.Pro.Interf,
   Rick.Dialog.Pro.Theme.Interf,
   Rick.Dialog.Pro.Types,
-  Rick.Dialog.Pro.Impl.FMX.RuntimeForm,
+  Rick.Dialog.Pro.Impl.FMX.Runtime.Form,
 
   Rick.Dialog.Pro.Tests.ThemeSpy,
   Rick.Dialog.Pro.Tests.FMX.Helpers;

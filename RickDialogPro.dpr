@@ -14,7 +14,7 @@ uses
   Rick.Dialog.Pro.Impl.FMX in 'src\Impl\Rick.Dialog.Pro.Impl.FMX.pas',
   Rick.Dialog.Pro.Icons in 'src\Rick.Dialog.Pro.Icons.pas',
   Rick.Dialog.Pro in 'src\Rick.Dialog.Pro.pas',
-  Rick.Dialog.Pro.Impl.FMX.RuntimeForm in 'src\Impl\Rick.Dialog.Pro.Impl.FMX.RuntimeForm.pas';
+  Rick.Dialog.Pro.Impl.FMX.Runtime.Form in 'src\Impl\Rick.Dialog.Pro.Impl.FMX.Runtime.Form.pas';
 
 begin
   try

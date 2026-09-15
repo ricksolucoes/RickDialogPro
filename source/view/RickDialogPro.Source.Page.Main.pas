@@ -31,14 +31,18 @@ type
     btSuccess: TSpeedButton;
     lblThemas: TLabel;
     cbxThemas: TComboBox;
+    btApplyTheme: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btErrorClick(Sender: TObject);
     procedure btWarningClick(Sender: TObject);
     procedure btInformationClick(Sender: TObject);
     procedure btSuccessClick(Sender: TObject);
+    procedure btApplyThemeClick(Sender: TObject);
   private
     FDialog : IRickDialogPro;
+    procedure LoadThemes;
+    procedure ApplySelectedTheme;
   end;
 
 var
@@ -46,7 +50,34 @@ var
 
 implementation
 
+uses
+  RickDialogPro.Source.Theme.Light,
+  RickDialogPro.Source.Theme.Green;
+
 {$R *.fmx}
+
+const
+  _THEME_DEFAULT = 0;
+  _THEME_LIGHT = 1;
+  _THEME_GREEN = 2;
+
+procedure TPageMain.ApplySelectedTheme;
+begin
+  case cbxThemas.ItemIndex of
+    _THEME_LIGHT:
+      FDialog := TRickDialogPro.New(TRickDialogProSourceLightTheme.New);
+
+    _THEME_GREEN:
+      FDialog := TRickDialogPro.New(TRickDialogProSourceGreenTheme.New);
+  else
+    FDialog := TRickDialogPro.New;
+  end;
+end;
+
+procedure TPageMain.btApplyThemeClick(Sender: TObject);
+begin
+  ApplySelectedTheme;
+end;
 
 procedure TPageMain.btErrorClick(Sender: TObject);
 begin
@@ -70,12 +101,27 @@ end;
 
 procedure TPageMain.FormCreate(Sender: TObject);
 begin
+  LoadThemes;
   FDialog := TRickDialogPro.New;
 end;
 
 procedure TPageMain.FormDestroy(Sender: TObject);
 begin
   FDialog := Nil;
+end;
+
+procedure TPageMain.LoadThemes;
+begin
+  cbxThemas.Items.BeginUpdate;
+  try
+    cbxThemas.Items.Clear;
+    cbxThemas.Items.Add('Default');
+    cbxThemas.Items.Add('Light');
+    cbxThemas.Items.Add('Green');
+    cbxThemas.ItemIndex := _THEME_DEFAULT;
+  finally
+    cbxThemas.Items.EndUpdate;
+  end;
 end;
 
 end.

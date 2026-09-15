@@ -49,6 +49,7 @@ Quando o framework é referenciado diretamente pela estrutura atual dos fontes, 
 src
 src\Impl
 src\Theme
+source\theme
 ```
 
 Esses caminhos descrevem a organização atual do repositório. Eles não constituem uma definição para toda possível forma futura de distribuição.
@@ -644,7 +645,13 @@ Os métodos do botão secundário não recebem `TRickDialogProKind` no contrato 
 
 ## 16. Exemplo do repositório
 
-O exemplo atual em `source/` demonstra o consumo básico com o tema padrão.
+O exemplo FireMonkey em `source/` demonstra o consumo básico e a seleção em tempo de execução entre três temas:
+
+- `Default`, que permanece como tema inicial e é criado com `TRickDialogPro.New`;
+- `Light`, implementado por `TRickDialogProSourceLightTheme`;
+- `Green`, implementado por `TRickDialogProSourceGreenTheme`.
+
+`Light` e `Green` pertencem ao projeto de exemplo. Eles demonstram como uma aplicação consumidora pode implementar `IRickDialogProTheme` sem alterar o tema padrão ou a API pública do framework.
 
 O formulário mantém:
 
@@ -652,13 +659,21 @@ O formulário mantém:
 FDialog: IRickDialogPro;
 ```
 
-cria a instância com:
+e inicia com:
 
 ```delphi
 FDialog := TRickDialogPro.New;
 ```
 
-e chama os quatro helpers semânticos:
+Após selecionar `Light` ou `Green` e clicar em `Apply`, o exemplo recria `FDialog` utilizando a sobrecarga existente que recebe o tema:
+
+```delphi
+FDialog := TRickDialogPro.New(TRickDialogProSourceLightTheme.New);
+// ou
+FDialog := TRickDialogPro.New(TRickDialogProSourceGreenTheme.New);
+```
+
+Ao selecionar `Default` e clicar em `Apply`, a fachada é recriada sem argumento de tema, retornando ao tema padrão do framework. Os quatro helpers semânticos continuam sendo chamados pelo mesmo contrato público:
 
 ```delphi
 FDialog.Error(...);
@@ -667,7 +682,7 @@ FDialog.Information(...);
 FDialog.Success(...);
 ```
 
-O exemplo atual não estabelece que todas as capacidades da API estejam demonstradas nele. Em particular, este guia não utiliza o projeto de exemplo como evidência de temas customizados ou testes automatizados de regressão.
+O exemplo não comprova que todas as capacidades da API possuem cobertura visual dedicada, e os temas do exemplo não fazem parte da suíte automatizada de regressão do framework.
 
 ## 17. Referência rápida da API
 
@@ -766,9 +781,9 @@ TRickDialogProConfig.Success(...)
 
 O repositório inclui um projeto DUnitX em `tests/RickDialogPro.Tests.dproj`, integrado ao `RickDialog.groupproj`. A suíte cobre os builders públicos de configuração e os ícones, o tema padrão, a RuntimeForm, o uso de background, cores semânticas, botões primário e secundário, hover, tooltips de overflow, resultados modais e fluxos end-to-end pela fachada pública.
 
-O arquivo de resultado atualmente armazenado em `APP/Debug/dunitx-results.xml` registra **48 testes executados**, com **0 erros**, **0 falhas** e **0 testes ignorados**.
+O código-fonte atual contém **48 declarações `[Test]`**. O runner de console está configurado para adicionar um logger XML compatível com NUnit por meio de `TDUnitX.Options.XMLOutputFile`, mas o pacote de projeto revisado não contém um artefato persistido com o resultado DUnitX.
 
-O projeto de testes habilita atualmente **Win32** como plataforma alvo. Portanto, o repositório fornece evidência automatizada para esse target configurado; este guia não estende a mesma afirmação de validação para Win64, Android, iOS ou macOS.
+O projeto de testes habilita atualmente **Win32** como plataforma alvo. Por isso, um resultado atual de execução para esse target deverá ser registrado no quality gate de build/testes antes da versão estável. Este guia não estende qualquer afirmação de validação para Win64, Android, iOS ou macOS.
 
 Esses testes protegem comportamento determinístico. Eles não devem ser interpretados como certificação visual pixel-perfect entre plataformas, fontes, configurações de DPI ou diferenças de renderização do sistema operacional.
 
@@ -787,6 +802,6 @@ Comportamento atual relevante:
 - `Transparency` permanece `True`; por isso, o guia não extrapola a descrição para efeitos visuais não validados.
 - `TRickDialogPro.New(ATheme)` exige um tema diferente de `nil`; a implementação não substitui silenciosamente pelo tema padrão.
 - Os tooltips de overflow são habilitados somente quando o runtime detecta que o texto renderizado não cabe na área disponível.
-- O resultado automatizado atualmente armazenado no repositório registra 48 testes bem-sucedidos, enquanto o projeto de testes está configurado para Win32.
+- O código-fonte declara 48 testes DUnitX e o projeto de testes está configurado para Win32; o pacote de projeto revisado não inclui um artefato persistido com o resultado da execução.
 
 Afirmações sobre outros targets ou sobre a renderização visual devem ser adicionadas somente depois que essas plataformas forem efetivamente validadas.

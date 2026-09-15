@@ -56,9 +56,9 @@ Unit pública   : Rick.Dialog.Pro
 Fachada pública: TRickDialogPro
 ```
 
-O projeto já conta com uma suíte automatizada em DUnitX integrada ao repositório. Na execução Win32 atualmente validada, os **48 testes passaram**, sem testes ignorados, falhas, erros ou leaks reportados.
+O projeto conta com uma suíte automatizada em DUnitX integrada ao repositório. O código-fonte atual declara **48 testes automatizados**, e o projeto de testes está configurado para o target Win32.
 
-Esse resultado confirma os comportamentos exercitados pela suíte atual em Win32. As demais plataformas continuam sendo consideradas não validadas até que sejam compiladas e executadas em seus próprios ambientes; por isso, o RickDialogPro não declara compatibilidade além das configurações que foram efetivamente verificadas.
+O pacote atual do projeto não contém um artefato persistido com o resultado de uma execução DUnitX. Por isso, esta documentação registra a existência da suíte e seu target configurado, mas não declara um resultado recente de aprovação para esta revisão. As demais plataformas permanecem não validadas até que sejam compiladas e executadas em seus próprios ambientes.
 
 ---
 
@@ -85,9 +85,13 @@ A arquitetura atual mantém a aplicação consumidora isolada da implementação
 flowchart TD
     APP[Aplicação Delphi] --> API[Rick.Dialog.Pro\nTRickDialogPro]
     API --> CONTRACT[IRickDialogPro]
-    CONTRACT --> IMPL[Rick.Dialog.Pro.Impl.FMX]
-    IMPL --> RUNTIME[Rick.Dialog.Pro.Impl.FMX.RuntimeForm\nInterface runtime interna]
-    IMPL --> THEME[Tema visual]
+    API --> IMPL[Rick.Dialog.Pro.Impl.FMX]
+    API --> DEFAULT[Rick.Dialog.Pro.Theme.Default]
+    IMPL --> CONTRACT
+    IMPL --> THEME[IRickDialogProTheme]
+    DEFAULT --> THEME
+    IMPL --> RUNTIME[Rick.Dialog.Pro.Impl.FMX.Runtime.Form\nInterface runtime interna]
+    RUNTIME --> THEME
     RUNTIME --> RESULT[Resultado da ação do usuário]
     RESULT --> APP
 ```
@@ -100,7 +104,7 @@ flowchart TD
 | `Rick.Dialog.Pro.Interf` | Contrato público do diálogo. |
 | `Rick.Dialog.Pro.Types` | Tipos públicos de configuração e resultado. |
 | `Rick.Dialog.Pro.Impl.FMX` | Implementação FireMonkey do contrato público e controle do ciclo de execução do diálogo. |
-| `Rick.Dialog.Pro.Impl.FMX.RuntimeForm` | Implementação interna da interface modal criada em runtime. |
+| `Rick.Dialog.Pro.Impl.FMX.Runtime.Form` | Implementação interna da interface modal criada em runtime. |
 | `Rick.Dialog.Pro.Icons` | Dados e resolução dos ícones utilizados pela implementação visual. |
 | `Rick.Dialog.Pro.Theme.Interf` | Contrato do tema visual. |
 | `Rick.Dialog.Pro.Theme.Default` | Implementação atual do tema padrão. |
@@ -166,7 +170,7 @@ end;
 
 O diálogo apresenta as opções e devolve a ação escolhida. A aplicação consumidora continua responsável por decidir o que deve acontecer em seguida.
 
-Um exemplo consumidor em FireMonkey está incluído em `source/` e utiliza o framework por meio da unit pública `Rick.Dialog.Pro`.
+Um exemplo consumidor em FireMonkey está incluído em `source/`, utiliza o framework por meio da unit pública `Rick.Dialog.Pro` e demonstra o tema padrão mais dois temas customizados no lado consumidor (`Light` e `Green`).
 
 ---
 
@@ -187,16 +191,7 @@ A suíte atual contém **48 testes automatizados**. Ela cobre os pontos do frame
 
 Os testes modais exercitam a RuntimeForm real e os handlers dos próprios botões. A suíte também verifica os três resultados atualmente expostos pela implementação: `None`, `Primary` e `Secondary`.
 
-O projeto de testes está atualmente habilitado para **Win32**. Na execução atualmente validada, a suíte apresentou:
-
-```text
-Tests Found   : 48
-Tests Ignored : 0
-Tests Passed  : 48
-Tests Leaked  : 0
-Tests Failed  : 0
-Tests Errored : 0
-```
+O projeto de testes está atualmente habilitado para **Win32**. O código-fonte atual contém **48 declarações `[Test]`**. Como o pacote de projeto utilizado nesta revisão não contém um XML persistido com o resultado DUnitX, o resultado de execução deverá ser registrado novamente no quality gate de build/testes antes da versão estável.
 
 Para executar a suíte no Delphi, abra `RickDialog.groupproj` ou `tests/RickDialogPro.Tests.dproj`, selecione o target Win32, compile e execute `RickDialogPro.Tests`. O próprio projeto de testes já contém os Search Paths necessários para os fontes do framework e utiliza `--exitbehavior:Pause` para a execução pelo console dentro da IDE.
 
@@ -279,6 +274,7 @@ Ao referenciar diretamente os fontes utilizando a estrutura atual do repositóri
 src
 src\Impl
 src\Theme
+source\theme
 ```
 
 Esses caminhos descrevem a organização atual dos fontes; eles não constituem uma definição de como toda forma futura de distribuição deverá ser configurada.
@@ -294,10 +290,10 @@ Esses caminhos descrevem a organização atual dos fontes; eles não constituem 
 |---|---|
 | **Delphi 12 Athens** | Alvo principal de desenvolvimento. |
 | **FireMonkey** | Framework visual alvo. |
-| **Win32** | Suíte automatizada executada com sucesso: 48/48 testes aprovados. |
+| **Win32** | Projeto DUnitX configurado para Win32 com 48 testes; ainda é necessário registrar uma execução atual no quality gate de build/testes. |
 | **Demais plataformas** | Ainda não validadas pelo projeto de testes automatizados atual. |
 
-O RickDialogPro documenta apenas a compatibilidade que foi tecnicamente verificada. O projeto de testes atual está configurado para Win32; os demais targets permanecem pendentes até serem compilados e exercitados diretamente.
+O RickDialogPro só declara compatibilidade após validação técnica. O projeto de testes atual está configurado para Win32, mas o pacote revisado não contém um resultado persistido de execução; por isso, a execução Win32 deverá ser confirmada novamente no quality gate de build/testes. Os demais targets permanecem pendentes até serem compilados e exercitados diretamente.
 
 ---
 
@@ -314,7 +310,7 @@ RickDialogPro/
 │   ├── Rick.Dialog.Pro.Icons.pas
 │   ├── Impl/
 │   │   ├── Rick.Dialog.Pro.Impl.FMX.pas
-│   │   └── Rick.Dialog.Pro.Impl.FMX.RuntimeForm.pas
+│   │   └── Rick.Dialog.Pro.Impl.FMX.Runtime.Form.pas
 │   └── Theme/
 │       ├── Rick.Dialog.Pro.Theme.Interf.pas
 │       ├── Rick.Dialog.Pro.Theme.Default.pas
@@ -322,6 +318,11 @@ RickDialogPro/
 ├── source/
 │   ├── RickDialogPro.Source.dpr
 │   ├── RickDialogPro.Source.dproj
+│   ├── theme/
+│   │   ├── RickDialogPro.Source.Theme.Light.pas
+│   │   ├── RickDialogPro.Source.Theme.Light.Colors.pas
+│   │   ├── RickDialogPro.Source.Theme.Green.pas
+│   │   └── RickDialogPro.Source.Theme.Green.Colors.pas
 │   └── view/
 │       ├── RickDialogPro.Source.Page.Main.pas
 │       └── RickDialogPro.Source.Page.Main.fmx
@@ -351,23 +352,11 @@ RickDialogPro/
 
 ## 🔧 Alterações estruturais desta reorganização
 
-- Foi criada a unit interna `Rick.Dialog.Pro.Impl.FMX.RuntimeForm`.
+- Foi criada a unit interna `Rick.Dialog.Pro.Impl.FMX.Runtime.Form`.
 - A implementação da interface modal criada em runtime foi movida de `Rick.Dialog.Pro.Impl.FMX` para a nova unit interna.
 - `Rick.Dialog.Pro.Impl.FMX` permaneceu responsável pela implementação FireMonkey de `IRickDialogPro` e pelo ciclo de execução do diálogo.
 - A fachada pública `Rick.Dialog.Pro` permaneceu inalterada como ponto de entrada suportado para consumo.
 - Esta reorganização não introduz nova funcionalidade de diálogo.
-
----
-
-## 🗺 Roadmap
-
-- [ ] Continuar a revisão das dependências entre units e dos acoplamentos estruturais desnecessários.
-- [ ] Continuar a atualização de XMLDoc e da documentação para desenvolvedores conforme o código evoluir.
-- [ ] Executar auditoria estrutural e semântica independente antes da versão estável.
-- [x] Adicionar uma suíte automatizada DUnitX para o target Win32 atualmente utilizado no desenvolvimento.
-- [ ] Validar plataformas adicionais antes de declarar compatibilidade mais ampla.
-- [ ] Publicar uma matriz de compatibilidade somente após a validação técnica desses targets.
-- [ ] Preparar a primeira versão estável.
 
 ---
 
