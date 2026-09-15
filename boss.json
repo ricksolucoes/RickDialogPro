@@ -1,0 +1,10 @@
+{
+	"name": "RickDialogPro",
+	"description": "Customizable dialog library for Delphi FireMonkey applications, with theming support and a simple fluent API.",
+	"version": "0.1.2",
+	"homepage": "ricksolucoes.com.br",
+	"mainsrc": "./src",
+	"browsingpath": "",
+	"projects": [],
+	"dependencies": {}
+}
