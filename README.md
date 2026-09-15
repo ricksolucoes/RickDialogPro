@@ -170,7 +170,7 @@ end;
 
 The dialog presents choices and returns the selected action. The consuming application remains responsible for deciding what happens next.
 
-A FireMonkey consumer example is included under `source/`, consumes the framework through the public `Rick.Dialog.Pro` unit, and demonstrates the default theme plus two consumer-side custom themes (`Light` and `Green`).
+A FireMonkey consumer example is included under `sample/`, consumes the framework through the public `Rick.Dialog.Pro` unit, and demonstrates the default theme plus two consumer-side custom themes (`Light` and `Green`).
 
 ---
 
@@ -274,7 +274,6 @@ When directly referencing the sources using the repository's current layout, the
 src
 src\Impl
 src\Theme
-source\theme
 ```
 
 These paths describe the current source organization; they are not a declaration of how every future distribution mechanism must be configured.
@@ -315,17 +314,17 @@ RickDialogPro/
 │       ├── Rick.Dialog.Pro.Theme.Interf.pas
 │       ├── Rick.Dialog.Pro.Theme.Default.pas
 │       └── Rick.Dialog.Pro.Theme.Default.Colors.pas
-├── source/
-│   ├── RickDialogPro.Source.dpr
-│   ├── RickDialogPro.Source.dproj
+├── sample/
+│   ├── RickDialogPro.sample.dpr
+│   ├── RickDialogPro.sample.dproj
 │   ├── theme/
-│   │   ├── RickDialogPro.Source.Theme.Light.pas
-│   │   ├── RickDialogPro.Source.Theme.Light.Colors.pas
-│   │   ├── RickDialogPro.Source.Theme.Green.pas
-│   │   └── RickDialogPro.Source.Theme.Green.Colors.pas
+│   │   ├── RickDialogPro.sample.Theme.Light.pas
+│   │   ├── RickDialogPro.sample.Theme.Light.Colors.pas
+│   │   ├── RickDialogPro.sample.Theme.Green.pas
+│   │   └── RickDialogPro.sample.Theme.Green.Colors.pas
 │   └── view/
-│       ├── RickDialogPro.Source.Page.Main.pas
-│       └── RickDialogPro.Source.Page.Main.fmx
+│       ├── RickDialogPro.sample.Page.Main.pas
+│       └── RickDialogPro.sample.Page.Main.fmx
 ├── tests/
 │   ├── RickDialogPro.Tests.dpr
 │   ├── RickDialogPro.Tests.dproj

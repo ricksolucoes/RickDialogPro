@@ -41,7 +41,7 @@ LDialog := TRickDialogPro.New(LTheme);
 
 ## 2. Using the Current Source Layout
 
-The current repository includes a FireMonkey example under `source/`.
+The current repository includes a FireMonkey example under `sample/`.
 
 When the framework is referenced directly from the current source layout, that example uses these Delphi Search Path directories:
 
@@ -49,7 +49,6 @@ When the framework is referenced directly from the current source layout, that e
 src
 src\Impl
 src\Theme
-source\theme
 ```
 
 These paths describe the current repository organization. They are not a statement about every possible future distribution mechanism.
@@ -645,11 +644,11 @@ The secondary button methods do not receive `TRickDialogProKind` in the current 
 
 ## 16. Repository Example
 
-The FireMonkey example under `source/` demonstrates basic consumption and runtime selection among three themes:
+The FireMonkey example under `sample/` demonstrates basic consumption and runtime selection among three themes:
 
 - `Default`, which remains the initial theme and is created with `TRickDialogPro.New`;
-- `Light`, implemented by `TRickDialogProSourceLightTheme`;
-- `Green`, implemented by `TRickDialogProSourceGreenTheme`.
+- `Light`, implemented by `TRickDialogProSampleLightTheme`;
+- `Green`, implemented by `TRickDialogProSampleGreenTheme`.
 
 `Light` and `Green` belong to the example project. They demonstrate how a consumer can implement `IRickDialogProTheme` without changing the framework's default theme or public API.
 

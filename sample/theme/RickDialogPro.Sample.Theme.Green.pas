@@ -1,12 +1,12 @@
 ﻿{*******************************************************}
 {   Project: RickDialogPro                              }
-{   Objective: Light Example Visual Theme               }
+{   Objective: Green Example Visual Theme               }
 {   Author: Ricardo R. Pereira                          }
 {   Created: 14/09/2026                                 }
 {                                                       }
 {   Summary:                                            }
 {     Implements IRickDialogProTheme for the source     }
-{     example using the light palette without changing  }
+{     example using the green palette without changing  }
 {     the RickDialogPro framework or its default theme. }
 {                                                       }
 {   Copyright (c) 2026 Ricardo R. Pereira               }
@@ -31,7 +31,7 @@
 {   penalties.                                          }
 {*******************************************************}
 
-unit RickDialogPro.Source.Theme.Light;
+unit RickDialogPro.Sample.Theme.Green;
 
 interface
 
@@ -42,15 +42,15 @@ uses
 
 type
   /// <summary>
-  ///   Tema light utilizado exclusivamente pelo projeto de exemplo.
+  ///   Tema green utilizado exclusivamente pelo projeto de exemplo.
   /// </summary>
   /// <remarks>
   ///   A classe não possui estado mutável e implementa o mesmo contrato público
   ///   utilizado por qualquer tema customizado do RickDialogPro.
   /// </remarks>
-  TRickDialogProSourceLightTheme = class sealed(TInterfacedObject, IRickDialogProTheme)
+  TRickDialogProSampleGreenTheme = class sealed(TInterfacedObject, IRickDialogProTheme)
   public
-    /// <summary>Cria uma nova instância do tema light.</summary>
+    /// <summary>Cria uma nova instância do tema green.</summary>
     class function New: IRickDialogProTheme;
 
     /// <summary>Retorna a cor de fundo da janela modal.</summary>
@@ -105,178 +105,178 @@ type
 implementation
 
 uses
-  RickDialogPro.Source.Theme.Light.Colors;
+  RickDialogPro.Sample.Theme.Green.Colors;
 
-{ TRickDialogProSourceLightTheme }
+{ TRickDialogProSampleGreenTheme }
 
-class function TRickDialogProSourceLightTheme.New: IRickDialogProTheme;
+class function TRickDialogProSampleGreenTheme.New: IRickDialogProTheme;
 begin
   Result := Self.Create;
 end;
 
-function TRickDialogProSourceLightTheme.Background: TAlphaColor;
+function TRickDialogProSampleGreenTheme.Background: TAlphaColor;
 begin
-  Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_BACKGROUND;
+  Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_BACKGROUND;
 end;
 
-function TRickDialogProSourceLightTheme.Surface: TAlphaColor;
+function TRickDialogProSampleGreenTheme.Surface: TAlphaColor;
 begin
-  Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_SURFACE;
+  Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_SURFACE;
 end;
 
-function TRickDialogProSourceLightTheme.SurfaceElevated: TAlphaColor;
+function TRickDialogProSampleGreenTheme.SurfaceElevated: TAlphaColor;
 begin
-  Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_SURFACE_ELEVATED;
+  Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_SURFACE_ELEVATED;
 end;
 
-function TRickDialogProSourceLightTheme.Border: TAlphaColor;
+function TRickDialogProSampleGreenTheme.Border: TAlphaColor;
 begin
-  Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_BORDER;
+  Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_BORDER;
 end;
 
-function TRickDialogProSourceLightTheme.TextPrimary: TAlphaColor;
+function TRickDialogProSampleGreenTheme.TextPrimary: TAlphaColor;
 begin
-  Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_TEXT_PRIMARY;
+  Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_TEXT_PRIMARY;
 end;
 
-function TRickDialogProSourceLightTheme.TextSecondary: TAlphaColor;
+function TRickDialogProSampleGreenTheme.TextSecondary: TAlphaColor;
 begin
-  Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_TEXT_SECONDARY;
+  Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_TEXT_SECONDARY;
 end;
 
-function TRickDialogProSourceLightTheme.StatusColor(
+function TRickDialogProSampleGreenTheme.StatusColor(
   AKind: TRickDialogProKind): TAlphaColor;
 begin
   case AKind of
     TRickDialogProKind.Error:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_STATUS_ERROR;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_STATUS_ERROR;
 
     TRickDialogProKind.Warning:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_STATUS_WARNING;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_STATUS_WARNING;
 
     TRickDialogProKind.Information:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_STATUS_INFORMATION;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_STATUS_INFORMATION;
 
     TRickDialogProKind.Success:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_STATUS_SUCCESS;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_STATUS_SUCCESS;
   else
-    Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_ACCENT;
+    Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_ACCENT;
   end;
 end;
 
-function TRickDialogProSourceLightTheme.IconBackground(
+function TRickDialogProSampleGreenTheme.IconBackground(
   AKind: TRickDialogProKind): TAlphaColor;
 begin
   case AKind of
     TRickDialogProKind.Error:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_ICON_BG_ERROR;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_ICON_BG_ERROR;
 
     TRickDialogProKind.Warning:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_ICON_BG_WARNING;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_ICON_BG_WARNING;
 
     TRickDialogProKind.Information:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_ICON_BG_INFORMATION;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_ICON_BG_INFORMATION;
 
     TRickDialogProKind.Success:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_ICON_BG_SUCCESS;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_ICON_BG_SUCCESS;
   else
-    Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_ICON_BG_INFORMATION;
+    Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_ICON_BG_INFORMATION;
   end;
 end;
 
-function TRickDialogProSourceLightTheme.IconStroke(
+function TRickDialogProSampleGreenTheme.IconStroke(
   AKind: TRickDialogProKind): TAlphaColor;
 begin
   case AKind of
     TRickDialogProKind.Error:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_ICON_STROKE_ERROR;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_ICON_STROKE_ERROR;
 
     TRickDialogProKind.Warning:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_ICON_STROKE_WARNING;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_ICON_STROKE_WARNING;
 
     TRickDialogProKind.Information:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_ICON_STROKE_INFORMATION;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_ICON_STROKE_INFORMATION;
 
     TRickDialogProKind.Success:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_ICON_STROKE_SUCCESS;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_ICON_STROKE_SUCCESS;
   else
-    Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_ICON_STROKE_INFORMATION;
+    Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_ICON_STROKE_INFORMATION;
   end;
 end;
 
-function TRickDialogProSourceLightTheme.PrimaryButtonBackground(
+function TRickDialogProSampleGreenTheme.PrimaryButtonBackground(
   AKind: TRickDialogProKind): TAlphaColor;
 begin
   case AKind of
     TRickDialogProKind.Error:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_BUTTON_ERROR_BG;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_BUTTON_ERROR_BG;
 
     TRickDialogProKind.Warning:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_BUTTON_WARNING_BG;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_BUTTON_WARNING_BG;
 
     TRickDialogProKind.Information:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_BUTTON_INFORMATION_BG;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_BUTTON_INFORMATION_BG;
 
     TRickDialogProKind.Success:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_BUTTON_SUCCESS_BG;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_BUTTON_SUCCESS_BG;
   else
-    Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_BUTTON_INFORMATION_BG;
+    Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_BUTTON_INFORMATION_BG;
   end;
 end;
 
-function TRickDialogProSourceLightTheme.PrimaryButtonHoverBackground(
+function TRickDialogProSampleGreenTheme.PrimaryButtonHoverBackground(
   AKind: TRickDialogProKind): TAlphaColor;
 begin
   case AKind of
     TRickDialogProKind.Error:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_BUTTON_ERROR_HOVER_BG;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_BUTTON_ERROR_HOVER_BG;
 
     TRickDialogProKind.Warning:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_BUTTON_WARNING_HOVER_BG;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_BUTTON_WARNING_HOVER_BG;
 
     TRickDialogProKind.Information:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_BUTTON_INFORMATION_HOVER_BG;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_BUTTON_INFORMATION_HOVER_BG;
 
     TRickDialogProKind.Success:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_BUTTON_SUCCESS_HOVER_BG;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_BUTTON_SUCCESS_HOVER_BG;
   else
-    Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_BUTTON_INFORMATION_HOVER_BG;
+    Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_BUTTON_INFORMATION_HOVER_BG;
   end;
 end;
 
-function TRickDialogProSourceLightTheme.PrimaryButtonText(
+function TRickDialogProSampleGreenTheme.PrimaryButtonText(
   AKind: TRickDialogProKind): TAlphaColor;
 begin
   case AKind of
     TRickDialogProKind.Error:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_BUTTON_ERROR_TEXT;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_BUTTON_ERROR_TEXT;
 
     TRickDialogProKind.Warning:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_BUTTON_WARNING_TEXT;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_BUTTON_WARNING_TEXT;
 
     TRickDialogProKind.Information:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_BUTTON_INFORMATION_TEXT;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_BUTTON_INFORMATION_TEXT;
 
     TRickDialogProKind.Success:
-      Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_BUTTON_SUCCESS_TEXT;
+      Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_BUTTON_SUCCESS_TEXT;
   else
-    Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_BUTTON_INFORMATION_TEXT;
+    Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_BUTTON_INFORMATION_TEXT;
   end;
 end;
 
-function TRickDialogProSourceLightTheme.SecondaryButtonBackground: TAlphaColor;
+function TRickDialogProSampleGreenTheme.SecondaryButtonBackground: TAlphaColor;
 begin
-  Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_BUTTON_SECONDARY_BG;
+  Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_BUTTON_SECONDARY_BG;
 end;
 
-function TRickDialogProSourceLightTheme.SecondaryButtonHoverBackground: TAlphaColor;
+function TRickDialogProSampleGreenTheme.SecondaryButtonHoverBackground: TAlphaColor;
 begin
-  Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_BUTTON_SECONDARY_HOVER_BG;
+  Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_BUTTON_SECONDARY_HOVER_BG;
 end;
 
-function TRickDialogProSourceLightTheme.SecondaryButtonText: TAlphaColor;
+function TRickDialogProSampleGreenTheme.SecondaryButtonText: TAlphaColor;
 begin
-  Result := _RICK_DIALOG_PRO_SOURCE_LIGHT_BUTTON_SECONDARY_TEXT;
+  Result := _RICK_DIALOG_PRO_SAMPLE_GREEN_BUTTON_SECONDARY_TEXT;
 end;
 
 end.

@@ -41,7 +41,7 @@ LDialog := TRickDialogPro.New(LTheme);
 
 ## 2. Utilizando a estrutura atual dos fontes
 
-O repositório atual inclui um exemplo FireMonkey em `source/`.
+O repositório atual inclui um exemplo FireMonkey em `sample/`.
 
 Quando o framework é referenciado diretamente pela estrutura atual dos fontes, esse exemplo utiliza estes diretórios no Search Path do Delphi:
 
@@ -49,7 +49,6 @@ Quando o framework é referenciado diretamente pela estrutura atual dos fontes, 
 src
 src\Impl
 src\Theme
-source\theme
 ```
 
 Esses caminhos descrevem a organização atual do repositório. Eles não constituem uma definição para toda possível forma futura de distribuição.
@@ -645,11 +644,11 @@ Os métodos do botão secundário não recebem `TRickDialogProKind` no contrato 
 
 ## 16. Exemplo do repositório
 
-O exemplo FireMonkey em `source/` demonstra o consumo básico e a seleção em tempo de execução entre três temas:
+O exemplo FireMonkey em `sample/` demonstra o consumo básico e a seleção em tempo de execução entre três temas:
 
 - `Default`, que permanece como tema inicial e é criado com `TRickDialogPro.New`;
-- `Light`, implementado por `TRickDialogProSourceLightTheme`;
-- `Green`, implementado por `TRickDialogProSourceGreenTheme`.
+- `Light`, implementado por `TRickDialogProSampleLightTheme`;
+- `Green`, implementado por `TRickDialogProSampleGreenTheme`.
 
 `Light` e `Green` pertencem ao projeto de exemplo. Eles demonstram como uma aplicação consumidora pode implementar `IRickDialogProTheme` sem alterar o tema padrão ou a API pública do framework.
 
@@ -668,9 +667,9 @@ FDialog := TRickDialogPro.New;
 Após selecionar `Light` ou `Green` e clicar em `Apply`, o exemplo recria `FDialog` utilizando a sobrecarga existente que recebe o tema:
 
 ```delphi
-FDialog := TRickDialogPro.New(TRickDialogProSourceLightTheme.New);
+FDialog := TRickDialogPro.New(TRickDialogProSampleLightTheme.New);
 // ou
-FDialog := TRickDialogPro.New(TRickDialogProSourceGreenTheme.New);
+FDialog := TRickDialogPro.New(TRickDialogProSampleGreenTheme.New);
 ```
 
 Ao selecionar `Default` e clicar em `Apply`, a fachada é recriada sem argumento de tema, retornando ao tema padrão do framework. Os quatro helpers semânticos continuam sendo chamados pelo mesmo contrato público:

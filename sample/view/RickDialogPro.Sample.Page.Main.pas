@@ -1,4 +1,4 @@
-unit RickDialogPro.Source.Page.Main;
+unit RickDialogPro.Sample.Page.Main;
 
 interface
 
@@ -51,8 +51,8 @@ var
 implementation
 
 uses
-  RickDialogPro.Source.Theme.Light,
-  RickDialogPro.Source.Theme.Green;
+  RickDialogPro.Sample.Theme.Light,
+  RickDialogPro.Sample.Theme.Green;
 
 {$R *.fmx}
 
@@ -65,10 +65,10 @@ procedure TPageMain.ApplySelectedTheme;
 begin
   case cbxThemas.ItemIndex of
     _THEME_LIGHT:
-      FDialog := TRickDialogPro.New(TRickDialogProSourceLightTheme.New);
+      FDialog := TRickDialogPro.New(TRickDialogProSampleLightTheme.New);
 
     _THEME_GREEN:
-      FDialog := TRickDialogPro.New(TRickDialogProSourceGreenTheme.New);
+      FDialog := TRickDialogPro.New(TRickDialogProSampleGreenTheme.New);
   else
     FDialog := TRickDialogPro.New;
   end;
